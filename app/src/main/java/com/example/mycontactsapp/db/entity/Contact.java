@@ -1,6 +1,8 @@
-package com.example.mycontactsapp;
+package com.example.mycontactsapp.db.entity;
 
-public class Contact {
+import androidx.recyclerview.widget.RecyclerView;
+
+public class Contact  {
 
     public static final String TABLE_NAME = "contacts";
     public static final String COLUMN_ID = "contact_id";
@@ -11,7 +13,7 @@ public class Contact {
     private String email;
     private int id;
 
-    private Contact() {
+    public Contact() {
     }
 
     public Contact(String name, String email, int id) {

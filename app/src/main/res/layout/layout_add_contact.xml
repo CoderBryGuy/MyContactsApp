@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/new_contact_little"
+            android:layout_marginBottom="15dp"
+            android:lineSpacingExtra="10sp"
+            android:text="@string/new_contact"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/name"
+              android:background="@android:color/transparent"
+              android:gravity="top"
+              android:hint="@string/contact_name"
+              android:inputType="textCapSentences|textMultiLine"
+              android:lines="4"
+              android:textSize="16sp"/>
+
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/email"
+              android:background="@android:color/transparent"
+              android:gravity="top"
+              android:hint="@string/contact_name"
+              android:inputType="textEmailAddress"
+              android:lines="4"
+              android:textSize="16sp"/>
+
+
+</LinearLayout>
