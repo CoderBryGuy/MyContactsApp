@@ -1,5 +1,6 @@
 package com.example.mycontactsapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,22 +39,22 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
-            final Contact contact = mContactArrayList.get(position);
+    public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, @SuppressLint("RecyclerView") int positions) {
+            final Contact contact = mContactArrayList.get(positions);
             holder.name.setText(contact.getName());
             holder.email.setText(contact.getEmail());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mMainActivity.addAndEditContacts(true, contact, positions);
                 }
             });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mContactArrayList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
