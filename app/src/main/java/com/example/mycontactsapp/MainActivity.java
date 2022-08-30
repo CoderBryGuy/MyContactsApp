@@ -1,7 +1,12 @@
 package com.example.mycontactsapp;
 
+import android.content.DialogInterface;
+import android.provider.ContactsContract;
+import android.view.LayoutInflater;
 import android.view.View;
-import androidx.annotation.NonNull;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
@@ -12,16 +17,14 @@ import com.example.mycontactsapp.adapter.ContactsAdapter;
 import com.example.mycontactsapp.db.DataBaseHelper;
 import com.example.mycontactsapp.db.entity.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-   private ArrayList<Contact> mContactArrayList = new ArrayList<>();
-   private RecyclerView mRecyclerView;
-   private DataBaseHelper db;
-
+    private ArrayList<Contact> mContactArrayList = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private DataBaseHelper db;
 
 
     private ContactsAdapter mContactsAdapter;
@@ -58,7 +61,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void addAndEditContacts(boolean b, Contact contact, int positions) {
+    public void addAndEditContacts(final boolean isUpdated, final Contact contact, final int position) {
+        LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+        View view = layoutInflater.inflate(R.layout.layout_add_contact, null);
 
+        AlertDialog.Builder alerDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alerDialogBuilder.setView(view);
+
+        TextView contactTitle = view.findViewById(R.id.new_contact_title);
+        final EditText newContact = view.findViewById(R.id.name);
+        final EditText contactEmail = view.findViewById(R.id.email);
+
+        contactTitle.setText(!isUpdated ? "Add New Contact" : "Edit Contact");
+
+        if (isUpdated && contact != null) {
+            newContact.setText(contact.getName());
+            contactEmail.setText(contact.getEmail());
+        }
+
+        alerDialogBuilder.setCancelable(false)
+                .setPositiveButton(isUpdated ? "Update" : "Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton("Delete",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(isUpdated){
+                                    DeletedContact(contact, position);
+                                }else{
+                                    dialog.cancel();
+                                }
+                            }
+                        });
+
+        final AlertDialog alertDialog = alerDialogBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

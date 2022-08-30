@@ -9,7 +9,7 @@
     <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/new_contact_little"
+            android:id="@+id/new_contact_title"
             android:layout_marginBottom="15dp"
             android:lineSpacingExtra="10sp"
             android:text="@string/new_contact"
